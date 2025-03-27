@@ -5,9 +5,9 @@ namespace Hireplicity.CodeChallenge.Api.Services.Contracts
     public interface IHireplicityRepositories
     {
         Task<IEnumerable<ServiceRequest>> GetAllAsync();
-        Task<ServiceRequest> GetByIdAsync(Guid Id);
-        Task<bool> InsertAsync(ServiceRequest serviceRequest);
-        bool UpdateAsync(ServiceRequest serviceRequest);
-        bool DeleteAsync(ServiceRequest serviceRequest);
+        Task<ServiceRequest> GetByIdAsync(Guid id);
+        Task<ServiceRequest> InsertAsync(ServiceRequest serviceRequest);
+        Task<ServiceRequest> UpdateAsync(Guid id, ServiceRequest serviceRequest);
+        Task<bool> DeleteAsync(Guid id);
     }
 }

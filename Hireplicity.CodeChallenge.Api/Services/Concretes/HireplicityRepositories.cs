@@ -6,37 +6,54 @@ namespace Hireplicity.CodeChallenge.Api.Services.Concretes
 {
     public class HireplicityRepositories : IHireplicityRepositories
     {
-        private readonly HirepilicityDbContext _context;
-        public HireplicityRepositories(HirepilicityDbContext context)
+        private readonly HirepilicityDbContext _dbContext;
+        public HireplicityRepositories(HirepilicityDbContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<ServiceRequest>> GetAllAsync()
         {
-            return await _context.ServiceRequests.ToListAsync();
+            return await _dbContext.ServiceRequests.AsNoTracking().ToListAsync();
         }
 
-        public async Task<ServiceRequest> GetByIdAsync(Guid Id)
+        public async Task<ServiceRequest> GetByIdAsync(Guid id)
         {
-            return await _context.ServiceRequests.FirstOrDefaultAsync(x => x.Id == Id);
+            return await _dbContext.ServiceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<bool> InsertAsync(ServiceRequest serviceRequest)
+        public async Task<ServiceRequest> InsertAsync(ServiceRequest serviceRequest)
         {
-            await _context.ServiceRequests.AddAsync(serviceRequest);
-            return true;
+            await _dbContext.ServiceRequests.AddAsync(serviceRequest);
+            await _dbContext.SaveChangesAsync();
+            return serviceRequest;
         }
 
-        public bool UpdateAsync(ServiceRequest serviceRequest)
+        public async Task<ServiceRequest> UpdateAsync(Guid id, ServiceRequest serviceRequest)
         {
-            _context.ServiceRequests.Update(serviceRequest);
-            return true;
+            ServiceRequest serviceRequestResult = await _dbContext.ServiceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            if (serviceRequestResult == null)
+            {
+                return null;
+            }
+
+            serviceRequestResult = serviceRequest;
+
+            _dbContext.ServiceRequests.Update(serviceRequestResult);
+            await _dbContext.SaveChangesAsync();
+            return serviceRequest;
         }
 
-        public bool DeleteAsync(ServiceRequest serviceRequest)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            _context.ServiceRequests.Remove(serviceRequest);
+            ServiceRequest serviceRequestResult = await _dbContext.ServiceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            if (serviceRequestResult == null)
+            {
+                return false;
+            }
+
+            _dbContext.ServiceRequests.Remove(serviceRequestResult);
+            await _dbContext.SaveChangesAsync();
             return true;
         }
     }
