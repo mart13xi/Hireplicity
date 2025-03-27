@@ -2,11 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hireplicity.AppHost", "Hireplicity.AppHost\Hireplicity.AppHost.csproj", "{A5EBF8DC-BB53-420E-AC94-07608B215BC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hireplicity.AppHost", "Hireplicity.AppHost\Hireplicity.AppHost.csproj", "{A5EBF8DC-BB53-420E-AC94-07608B215BC3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hireplicity.ServiceDefaults", "Hireplicity.ServiceDefaults\Hireplicity.ServiceDefaults.csproj", "{A39D1161-5445-43AB-A52A-C2747C4466FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hireplicity.CodeChallenge.Api", "Hireplicity.CodeChallenge.Api\Hireplicity.CodeChallenge.Api.csproj", "{6896E3E2-970F-4CDA-99D5-E38E71E634CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hireplicity.CodeChallenge.Api.Test", "Hireplicity.CodeChallenge.Api.Test\Hireplicity.CodeChallenge.Api.Test.csproj", "{CC9FE5D7-4EE2-49DC-88E3-EBD4738AE739}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{6896E3E2-970F-4CDA-99D5-E38E71E634CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6896E3E2-970F-4CDA-99D5-E38E71E634CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6896E3E2-970F-4CDA-99D5-E38E71E634CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9FE5D7-4EE2-49DC-88E3-EBD4738AE739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9FE5D7-4EE2-49DC-88E3-EBD4738AE739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9FE5D7-4EE2-49DC-88E3-EBD4738AE739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9FE5D7-4EE2-49DC-88E3-EBD4738AE739}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

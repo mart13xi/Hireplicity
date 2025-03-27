@@ -27,11 +27,9 @@ namespace Hireplicity.CodeChallenge.Api.Controllers
             try
             {
                 IEnumerable<ServiceRequest> serviceRequests = await _hireplicityRepositories.GetAllAsync();
+                if (!serviceRequests.Any()) return NoContent();
 
-                if (serviceRequests.Any()) return Ok(serviceRequests);
-                else return NoContent();
-
-
+                return Ok(serviceRequests);
             }
             catch (Exception ex)
             {
@@ -49,9 +47,9 @@ namespace Hireplicity.CodeChallenge.Api.Controllers
             try
             {
                 ServiceRequest serviceRequest = await _hireplicityRepositories.GetByIdAsync(id);
+                if (serviceRequest == null) return NotFound();
 
-                if (serviceRequest != null) return Ok(serviceRequest);
-                else return NotFound();
+                return Ok(serviceRequest);
             }
             catch (Exception ex)
             {
@@ -61,14 +59,13 @@ namespace Hireplicity.CodeChallenge.Api.Controllers
 
         [HttpPost()]
         [SwaggerOperation(Summary = "Insert new entry for Service Requests", Description = "Used by Dev")]
-        [ProducesResponseType((int)HttpStatusCode.Created)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Insert(ServiceRequest serviceRequest)
         {
             try
             {
                 ServiceRequest result = await _hireplicityRepositories.InsertAsync(serviceRequest);
-                return Created();
+                return CreatedAtAction(null, result.Id.ToString());
             }
             catch (Exception ex)
             {
@@ -86,9 +83,9 @@ namespace Hireplicity.CodeChallenge.Api.Controllers
             try
             {
                 ServiceRequest serviceRequest = await _hireplicityRepositories.UpdateAsync(id, data);
+                if (serviceRequest == null) return NotFound();
 
-                if (serviceRequest != null) return Ok(serviceRequest);
-                else return NotFound();
+                return Ok(serviceRequest);
             }
             catch (Exception ex)
             {
@@ -106,10 +103,9 @@ namespace Hireplicity.CodeChallenge.Api.Controllers
             try
             {
                 bool isSuccess = await _hireplicityRepositories.DeleteAsync(id);
-
                 if (!isSuccess) return NotFound();
 
-                return Created();
+                return CreatedAtAction(null, isSuccess);
             }
             catch (Exception ex)
             {

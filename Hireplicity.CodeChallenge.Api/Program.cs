@@ -2,7 +2,6 @@ using Hireplicity.CodeChallenge.Api.Data;
 using Hireplicity.CodeChallenge.Api.Services.Concretes;
 using Hireplicity.CodeChallenge.Api.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

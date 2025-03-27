@@ -31,13 +31,19 @@ namespace Hireplicity.CodeChallenge.Api.Services.Concretes
 
         public async Task<ServiceRequest> UpdateAsync(Guid id, ServiceRequest serviceRequest)
         {
-            ServiceRequest serviceRequestResult = await _dbContext.ServiceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            ServiceRequest serviceRequestResult = await _dbContext.ServiceRequests.FirstOrDefaultAsync(x => x.Id == id);
             if (serviceRequestResult == null)
             {
                 return null;
             }
 
-            serviceRequestResult = serviceRequest;
+            serviceRequestResult.BuildingCode = serviceRequest.BuildingCode;
+            serviceRequestResult.Description = serviceRequest.Description;
+            serviceRequestResult.CurrentStatus = serviceRequest.CurrentStatus;
+            serviceRequestResult.CreatedBy = serviceRequest.CreatedBy;
+            serviceRequestResult.CreatedDate = serviceRequest.CreatedDate;
+            serviceRequestResult.LastModifiedBy = serviceRequest.LastModifiedBy;
+            serviceRequestResult.LastModifiedDate = serviceRequest.LastModifiedDate;
 
             _dbContext.ServiceRequests.Update(serviceRequestResult);
             await _dbContext.SaveChangesAsync();
@@ -46,7 +52,7 @@ namespace Hireplicity.CodeChallenge.Api.Services.Concretes
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            ServiceRequest serviceRequestResult = await _dbContext.ServiceRequests.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            ServiceRequest serviceRequestResult = await _dbContext.ServiceRequests.FirstOrDefaultAsync(x => x.Id == id);
             if (serviceRequestResult == null)
             {
                 return false;
