@@ -21,4 +21,12 @@ For Command line
 -Copy the URL provided under "Login to the dashboard."
 -Finally, click on the "Hireplicity.CodeChallenge.Api" endpoint in the list
 
+For docker
+-build
+"docker build -f Hireplicity.CodeChallenge.Api\Dockerfile --force-rm -t codechallenge-api ."
+
+-run
+"docker run -t --rm -p 3001:8080 --name codechallenge-api-container codechallenge-api"
+
+
 In Visual Studio 2022, you can run the unit test. However, due to time constraints, I was only able to create a positive scenario.
