@@ -1,3 +1,9 @@
+using Hireplicity.CodeChallenge.Api.Data;
+using Hireplicity.CodeChallenge.Api.Services.Concretes;
+using Hireplicity.CodeChallenge.Api.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
@@ -7,7 +13,16 @@ builder.AddServiceDefaults();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => c.EnableAnnotations());
+
+//Automapper
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+//Repositories
+builder.Services.AddScoped<IHireplicityRepositories, HireplicityRepositories>();
+
+//Connection string
+builder.Services.AddDbContext<HirepilicityDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("HirepilicityDbConnection")));
 
 var app = builder.Build();
 
